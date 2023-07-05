@@ -2,8 +2,11 @@
 # Installation
 
 git clone https://github.com/kibretb/-Glide-PHP-Practical-Test.git
+
 cd -Glide-PHP-Practical-Test
+
 composer install --ignore-platform-reqs
+
 php artisan migrate
 
 
