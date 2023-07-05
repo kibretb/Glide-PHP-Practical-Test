@@ -56,14 +56,14 @@ class VendorApiRequest extends FormRequest
         if(is_array($macAddress)){
             foreach($macAddress as $key => $address){
                 $rendomisationCharacter = $address[1];
-                if(in_array($rendomisationCharacter,OrganisationallyUniqueIdentifier::RandomMacIndicators))
+                if(in_array($rendomisationCharacter,OrganisationallyUniqueIdentifier::RandomMacAddressIndicators))
                 {
                     unset($macAddress[$key]);
                 }
             }
         }else{
             $rendomisationCharacter = $macAddress[1];
-            if(in_array($rendomisationCharacter,OrganisationallyUniqueIdentifier::RandomMacIndicators)){
+            if(in_array($rendomisationCharacter,OrganisationallyUniqueIdentifier::RandomMacAddressIndicators)){
                 $macAddress = null;
             }
         }

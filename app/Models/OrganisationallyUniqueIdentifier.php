@@ -11,5 +11,5 @@ class OrganisationallyUniqueIdentifier extends Model
 
     protected $guarded = ['id'];
 
-    const RandomMacIndicators = ['2','6','A','E'];
+    const RandomMacAddressIndicators = ['2','6','A','E'];
 }
