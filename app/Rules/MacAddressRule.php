@@ -19,10 +19,18 @@ class MacAddressRule implements ValidationRule
             $fail('The ' . $attribute . ' must be of size 12 characters.');
         }
 
-        //checks the given mac address has the one uniform character as a separator
+        //checks the given mac address has one uniform character as a separator
         $separator =preg_replace("/[^.\-:]+/", "", $value);
         if(count(array_count_values(str_split($separator))) != 1) {
             $fail('The ' . $attribute . ' must has same separator character.');
+        }
+
+        //checks the separator character is evenly distributed
+        if(!empty($separator)){
+            $items = explode($separator[0], $value);
+            if(count(array_unique(array_map(function($item){ return strlen($item); }, $items))) != 1){
+                $fail('The ' . $attribute . ' has invalid format.The separator character should distributed evenly');
+            }
         }
     }
 }

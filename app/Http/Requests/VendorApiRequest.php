@@ -31,7 +31,6 @@ class VendorApiRequest extends FormRequest
 
     public function validateMultipleMacAddresses()
     {
-        
         $validator = Validator::make($this->all(),[
                 'mac_addresses'   => 'required|array',
                 'mac_addresses.*' => ['string','regex:/^[A-Za-z0-9]+[A-Za-z0-9.\-:]+[A-Za-z0-9]+$/',new MacAddressRule]
