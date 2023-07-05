@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\OrganisationallyUniqueIdentifier;
+use App\Rules\MacAddressRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,19 +31,11 @@ class VendorApiRequest extends FormRequest
 
     public function validateMultipleMacAddresses()
     {
+        
         $validator = Validator::make($this->all(),[
-            'mac_addresses'   => 'required|array',
-            'mac_addresses.*' => ['string','regex:/^[A-Za-z0-9]+[A-Za-z0-9.\-:]+[A-Za-z0-9]+$/',
-                                    function($attribute, $value, $fail) {
-                                        if(strlen(preg_replace("/[^a-zA-Z0-9]+/", "", $value) ) != 12){
-                                            $fail('The ' . $attribute . ' must be of size 12 characters.');
-                                        }
-                                    }
-                                ]
-                ],                                
-                [
-                    'mac_addresses.*.size' =>'The mac_addresses field must be 12 characters'
-                ]
+                'mac_addresses'   => 'required|array',
+                'mac_addresses.*' => ['string','regex:/^[A-Za-z0-9]+[A-Za-z0-9.\-:]+[A-Za-z0-9]+$/',new MacAddressRule]
+            ]
         );
 
         return $validator;
@@ -51,13 +44,8 @@ class VendorApiRequest extends FormRequest
     public function validateSingleMacAddress()
     {
         $validator = Validator::make($this->all(),[
-            'mac_address' => ['required','string','regex:/^[A-Za-z0-9]+[A-Za-z0-9.\-:]+[A-Za-z0-9]+$/',
-                                function($attribute, $value, $fail) {
-                                    if(strlen(preg_replace("/[^a-zA-Z0-9]+/", "", $value) ) != 12){
-                                        $fail('The ' . $attribute . ' must be of size 12 characters.');
-                                    }
-                                }]
-                        ]);
+            'mac_address' => ['required','string','regex:/^[A-Za-z0-9]+[A-Za-z0-9.\-:]+[A-Za-z0-9]+$/',new MacAddressRule]
+        ]);
 
         return $validator;
     }

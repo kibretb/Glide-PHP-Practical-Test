@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use League\Csv\Reader;
 use League\Csv\Statement;
 use App\Models\OrganisationallyUniqueIdentifier;
+use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class ImportIeeeOuiData extends Command
 {
@@ -28,8 +30,20 @@ class ImportIeeeOuiData extends Command
      */
     public function handle()
     {
+        //update file with the latest data
+        $disk = Storage::disk('public');
+        $dataUrl = 'http://standards-oui.ieee.org/oui/oui.csv';
 
-        $csv = Reader::createFromPath(__DIR__.'/Data/oui.csv', 'r');
+        $this->info('Updating IEEE OUI data file to its latest version...');
+        try{
+            $disk->put('Data/oui.csv', file_get_contents($dataUrl));
+        }catch(Exception $ex){
+            info($ex->getMessage());
+            throw $ex;
+        }
+
+        $this->info('Storing the latest data into database...');
+        $csv = Reader::createFromPath(storage_path('app/public/Data/oui.csv'), 'r');
         $csv->setHeaderOffset(0); 
 
         $stmt = Statement::create();
