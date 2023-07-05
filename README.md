@@ -18,11 +18,15 @@ php artisan migrate
   /api/vendor/single-mac-lookup
 
   postman endpoints
+  
     http://127.0.0.1:8000/api/vendor/single-mac-lookup
+    
     expected input mac_address
     
     http://127.0.0.1:8000/api/vendor/multiple-mac-lookup
+    
     expected input, an array of mac addresses (mac_addresses[])
+    
 
 # Kernel Command
   php artisan app:import-ieee-oui-data
