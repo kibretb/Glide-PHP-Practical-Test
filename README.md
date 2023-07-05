@@ -39,8 +39,10 @@ DB_DATABASE=laravel
 
 DB_USERNAME=root
 
-They can be updated on the .env file
 DB_PASSWORD=
+
+They can be updated on the .env file
+
 
 
   
