@@ -12,7 +12,8 @@ php artisan migrate
 
 # API endpoints
  Run php artisan route:list to see the defined API endpoints
-  /api/vendor/multiple-mac-lookup 
+  /api/vendor/multiple-mac-lookup
+  
   /api/vendor/single-mac-lookup
 
   postman endpoints
