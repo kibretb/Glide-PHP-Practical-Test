@@ -19,17 +19,18 @@ php artisan migrate
 
   postman endpoints
   
-    http://127.0.0.1:8000/api/vendor/single-mac-lookup
+    GET: http://127.0.0.1:8000/api/vendor/single-mac-lookup
     
-    expected input mac_address
+    expected input:- mac_address
     
-    http://127.0.0.1:8000/api/vendor/multiple-mac-lookup
+    POST:  http://127.0.0.1:8000/api/vendor/multiple-mac-lookup
     
-    expected input, an array of mac addresses (mac_addresses[])
+     expected input:- an array of mac addresses (mac_addresses[])
     
 
 # Kernel Command
   php artisan app:import-ieee-oui-data
+  
   This command first stores(updates) the latest version of the OUI IEEE file inside the storage public folder and persists it to the database.
 
 # Database 
